@@ -163,8 +163,7 @@ def add_mega_download(mega_link: str, path: str, listener):
             smsg, button = gd.drive_list(mname, True)
             if smsg:
                 msg1 = "File/Folder is already available in Drive.\nHere are the search results:"
-                sendMarkup(msg1, listener.bot, listener.update, button)
-                return
+                return sendMarkup(msg1, listener.bot, listener.update, button)
     limit = None
     if ZIP_UNZIP_LIMIT is not None and (listener.isZip or listener.extract):
         msg3 = f'Failed, Zip/Unzip limit is {ZIP_UNZIP_LIMIT}GB.\nYour File/Folder size is {get_readable_file_size(api.getSize(node))}.'
@@ -176,8 +175,7 @@ def add_mega_download(mega_link: str, path: str, listener):
         LOGGER.info('Checking File/Folder Size...')
         size = api.getSize(node)
         if size > limit * 1024**3:
-            sendMessage(msg3, listener.bot, listener.update)
-            return
+            return sendMessage(msg3, listener.bot, listener.update)
     with download_dict_lock:
         download_dict[listener.uid] = MegaDownloadStatus(mega_listener, listener)
     os.makedirs(path)

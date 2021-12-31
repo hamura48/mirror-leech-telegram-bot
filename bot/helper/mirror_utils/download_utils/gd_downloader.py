@@ -9,7 +9,8 @@ from bot.helper.ext_utils.bot_utils import get_readable_file_size
 
 
 def add_gd_download(link: str, listener, gdtot):
-    res, size, name, files = gdriveTools.GoogleDriveHelper().helper(link)
+    gd = gdriveTools.GoogleDriveHelper()
+    res, size, name, files = gd.helper(link)
     if res != "":
         sendMessage(res, listener.bot, listener.update)
         return
